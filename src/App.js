@@ -2,21 +2,30 @@ import React, { useState } from 'react';
 
 function Counter() {
   const [count, setCount] = useState(0);
+  const [direction, setDirection] = useState("inc")
 
-  const increment= () => {
-    if(count<10){
-    setCount(count + 1);}
-  }
-const decrement = () => {
-  if(count>0)
-    setCount(count - 1);
+  const changeState = () => {
+    if (direction == "inc") {
+      setCount(count + 1);
+
+      if (count + 1 == 10) {
+        setDirection("dec");
+      } 
+    } else {
+      setCount(count - 1);
+
+      if (count - 1 == 0) {  
+        setDirection("inc");
+      } 
+    }
   }
 
   return (
     <div>
       <p>Count: {count}</p>
-      <button onClick={increment}>Increment</button>
-      <button onClick={decrement}>decrement</button>
+      <button onClick={changeState}>
+        {direction == "inc" ? "increment" : "decrement"}
+      </button>  
     </div>
   );
 }
